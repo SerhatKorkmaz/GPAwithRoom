@@ -10,5 +10,6 @@ data class Lecture (
     val course_code : String,
     val credits : Int,
     val letter_grade : String,
-    val semester_code : Int
+    val semester_code : Int,
+    val student_id : Int
 )
