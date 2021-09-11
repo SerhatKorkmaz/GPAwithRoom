@@ -2,6 +2,7 @@ package com.example.gpacalculator.vm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gpacalculator.db.DataBase
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
 
-    val allUsers : MutableLiveData<List<User>>
+    val allUsers : LiveData<List<User>>
     private val repository : UserRepo
 
     init {

@@ -14,14 +14,14 @@ import com.example.gpacalculator.dc.User
 interface LectureDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addLecture(lecture : Lecture)
+    fun addLecture(lecture : Lecture)
 
     @Query("SELECT * FROM lectures_table ORDER BY course_id")
-    fun readAllLectures(): MutableLiveData<List<Lecture>>
+    fun readAllLectures(): LiveData<List<Lecture>>
 
     @Query("SELECT * FROM lectures_table WHERE student_id = :studentID AND semester_code = :semesterID")
-    fun getLecturesofStudentinSemester(studentID: Int, semesterID: Int): MutableLiveData<List<Lecture>>
+    fun getLecturesofStudentinSemester(studentID: Int, semesterID: Int): LiveData<List<Lecture>>
 
     @Query("SELECT * FROM lectures_table WHERE student_id = :studentID")
-    fun getAllLecturesofStudent(studentID: Int): MutableLiveData<List<Lecture>>
+    fun getAllLecturesofStudent(studentID: Int): LiveData<List<Lecture>>
 }

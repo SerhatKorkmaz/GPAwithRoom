@@ -3,24 +3,28 @@ package com.example.gpacalculator.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gpacalculator.databinding.ItemUserBinding
 import com.example.gpacalculator.dc.User
 
-class UserAdapter(val userList : List<User>,private val listener : OnItemClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val listener : OnItemClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-    inner class UserViewHolder(val binding : ItemUserBinding) : RecyclerView.ViewHolder(binding.root),
+    private var userList = emptyList<User>()
+
+    inner class UserViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener{
-            override fun onClick(v: View?) {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION){
-                    listener.onItemClick(position)
-                }
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION){
+                listener.onItemClick(position)
             }
+        }
 
         init{
             itemView.setOnClickListener(this)
         }
+
     }
 
     interface OnItemClickListener{
@@ -28,9 +32,9 @@ class UserAdapter(val userList : List<User>,private val listener : OnItemClickLi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent , false)
 
-        return UserViewHolder(binding)
+        return  UserViewHolder(binding);
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
@@ -40,7 +44,9 @@ class UserAdapter(val userList : List<User>,private val listener : OnItemClickLi
                     tvNameText.text = userList[position].user_name
                     tvDepartmentText.text = userList[position].user_department
                     tvGpaText.text = userList[position].user_CGPA.toString()
+
                 }
+
             }
         }
     }
@@ -48,4 +54,10 @@ class UserAdapter(val userList : List<User>,private val listener : OnItemClickLi
     override fun getItemCount(): Int {
         return userList.size
     }
+
+    fun setData(user : List<User>){
+        this.userList = user
+        notifyDataSetChanged()
+    }
+
 }

@@ -12,8 +12,8 @@ import com.example.gpacalculator.dc.User
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addUser(user : User)
+    fun addUser(user : User)
 
     @Query("SELECT * FROM user_table ORDER BY user_id")
-    fun getAllUsers(): MutableLiveData<List<User>>
+    fun getAllUsers(): LiveData<List<User>>
 }
