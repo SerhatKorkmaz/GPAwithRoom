@@ -1,6 +1,7 @@
 package com.example.gpacalculator.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,7 @@ class AddUserFragment : Fragment(R.layout.fragment_adduser){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        Log.d("Fragment Created", "Add User Fragment Created")
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_adduser, container, false)
@@ -50,7 +51,8 @@ class AddUserFragment : Fragment(R.layout.fragment_adduser){
                     userViewModel.addUser(newUser)
                     Toast.makeText(requireContext(), "New User Created", Toast.LENGTH_LONG).show()
 
-                    val action = AddUserFragmentDirections.actionAddUserFragment2ToWelcomeFragment()
+                    Log.d("Navigating", "Navigating to Welcome Fragment")
+                    val action = AddUserFragmentDirections.actionAddUserFragmentToWelcomeFragment()
                     findNavController().navigate(action)
                 }
         }

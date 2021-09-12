@@ -8,19 +8,19 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.gpacalculator.fragment.WelcomeFragment"
-        android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" >
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
         <action
-            android:id="@+id/action_welcomeFragment_to_addUserFragment2"
-            app:destination="@id/addUserFragment2" />
+            android:id="@+id/action_welcomeFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addUserFragment2"
+        android:id="@+id/addUserFragment"
         android:name="com.example.gpacalculator.fragment.AddUserFragment"
-        android:label="fragment_adduser"
-        tools:layout="@layout/fragment_adduser" >
+        android:label="AddUserFragment"
+        tools:layout="@layout/fragment_adduser">
         <action
-            android:id="@+id/action_addUserFragment2_to_welcomeFragment"
+            android:id="@+id/action_addUserFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
     </fragment>
 </navigation>

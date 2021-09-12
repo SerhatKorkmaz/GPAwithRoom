@@ -1,6 +1,7 @@
 package com.example.gpacalculator.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +23,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemCl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("Fragment Created", "Welcome Fragment Created")
         _binding = FragmentWelcomeBinding.bind(view)
 
         adapter = UserAdapter(this)
@@ -34,7 +36,8 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemCl
         })
 
         binding.bAdd.setOnClickListener{
-            val action = WelcomeFragmentDirections.actionWelcomeFragmentToAddUserFragment2()
+            Log.d("Navigating", "Navigating to Add User Fragment")
+               val action = WelcomeFragmentDirections.actionWelcomeFragmentToAddUserFragment()
             findNavController().navigate(action)
         }
 
