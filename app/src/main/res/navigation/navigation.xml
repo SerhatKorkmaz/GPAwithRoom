@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_welcomeFragment_to_addUserFragment"
-            app:destination="@id/addUserFragment" />
+            app:destination="@id/addUserFragment"
+            app:enterAnim="@anim/slide_in_r"
+            app:exitAnim="@anim/slide_out_l"
+            app:popEnterAnim="@anim/slide_in_l"
+            app:popExitAnim="@anim/slide_out_r" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
@@ -21,6 +25,10 @@
         tools:layout="@layout/fragment_adduser">
         <action
             android:id="@+id/action_addUserFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
+            app:destination="@id/welcomeFragment"
+            app:enterAnim="@anim/slide_out_l"
+            app:exitAnim="@anim/slide_in_r"
+            app:popEnterAnim="@anim/slide_out_r"
+            app:popExitAnim="@anim/slide_in_l" />
     </fragment>
 </navigation>

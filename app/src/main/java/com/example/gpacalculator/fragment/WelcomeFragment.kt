@@ -20,24 +20,28 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemCl
     private var _binding : FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewmodel = ViewModelProvider(this).get(UserViewModel::class.java)
+        adapter = UserAdapter(this)
+        Log.d("Tasks", "Welcome Fragment Created")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Log.d("Fragment Created", "Welcome Fragment Created")
+        Log.d("Tasks", "Welcome Fragment is visible")
         _binding = FragmentWelcomeBinding.bind(view)
 
-        adapter = UserAdapter(this)
         binding.recyclerview.adapter = adapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
-        viewmodel = ViewModelProvider(this).get(UserViewModel::class.java)
         viewmodel.allUsers.observe(viewLifecycleOwner, Observer { user->
             adapter.setData(user)
         })
 
         binding.bAdd.setOnClickListener{
-            Log.d("Navigating", "Navigating to Add User Fragment")
-               val action = WelcomeFragmentDirections.actionWelcomeFragmentToAddUserFragment()
+            Log.d("Tasks", "Navigating to Add User Fragment")
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToAddUserFragment()
             findNavController().navigate(action)
         }
 

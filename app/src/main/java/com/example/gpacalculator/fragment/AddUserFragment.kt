@@ -21,25 +21,16 @@ class AddUserFragment : Fragment(R.layout.fragment_adduser){
     private var _binding : FragmentAdduserBinding? = null
     private val binding get() = _binding!!
 
-    companion object{
-        fun newInstance() : AddUserFragment { return AddUserFragment()
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.d("Fragment Created", "Add User Fragment Created")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Tasks", "Add User Fragment Created")
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
-        return inflater.inflate(R.layout.fragment_adduser, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("Tasks", "Add User Fragment is visible")
         _binding = FragmentAdduserBinding.bind(view)
 
         binding.apply {
@@ -51,9 +42,10 @@ class AddUserFragment : Fragment(R.layout.fragment_adduser){
                     userViewModel.addUser(newUser)
                     Toast.makeText(requireContext(), "New User Created", Toast.LENGTH_LONG).show()
 
-                    Log.d("Navigating", "Navigating to Welcome Fragment")
+                    Log.d("Tasks", "Navigating to Welcome Fragment")
                     val action = AddUserFragmentDirections.actionAddUserFragmentToWelcomeFragment()
                     findNavController().navigate(action)
+
                 }
         }
     }

@@ -8,4 +8,16 @@
     <string name="enter_department">Enter Department</string>
     <string name="enter_name">Enter Name</string>
     <string name="add">Add</string>
+    <string name="letter_grade">Letter Grade :</string>
+    <string name="credits">Credits :</string>
+    <string name="course_code">Course Code :</string>
+    <string name="iv_semester">IV. Semester</string>
+    <string name="iii_semester">III. Semester</string>
+    <string name="ii_semester">II. Semester</string>
+    <string name="i_semester">I. Semester</string>
+    <string name="viii_semester">VIII. Semester</string>
+    <string name="vii_semester">VII. Semester</string>
+    <string name="vi_semester">VI. Semester</string>
+    <string name="v_semester">V. Semester</string>
+    <string name="semester_gpa">Semester GPA : </string>
 </resources>
