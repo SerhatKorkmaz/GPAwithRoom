@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/GPAwithRoom/GPAwithRoom/app/src/main/res/drawable/bg_drawable.xml" value="0.20885416666666667" />
         <entry key="..\:/GPAwithRoom/GPAwithRoom/app/src/main/res/layout/activity_main.xml" value="0.153125" />
+        <entry key="..\:/GPAwithRoom/GPAwithRoom/app/src/main/res/layout/fragment_addcourse.xml" value="0.17291666666666666" />
         <entry key="..\:/GPAwithRoom/GPAwithRoom/app/src/main/res/layout/fragment_adduser.xml" value="0.153125" />
         <entry key="..\:/GPAwithRoom/GPAwithRoom/app/src/main/res/layout/fragment_grades.xml" value="0.2" />
         <entry key="..\:/GPAwithRoom/GPAwithRoom/app/src/main/res/layout/fragment_user.xml" value="0.15677083333333333" />

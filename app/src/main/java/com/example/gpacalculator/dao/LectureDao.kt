@@ -27,4 +27,7 @@ interface LectureDao {
 
     @Query("DELETE FROM lectures_table WHERE student_id = :userId")
     fun deleteByUserId(userId: Int)
+
+    @Query("DELETE FROM lectures_table WHERE course_id = :courseid")
+    fun deleteCourse(courseid: Int)
 }

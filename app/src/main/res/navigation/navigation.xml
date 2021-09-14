@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.gpacalculator.fragment.WelcomeFragment"
+        android:name="com.example.gpacalculator.fragment.UserFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -34,6 +34,9 @@
         <argument
             android:name="user"
             app:argType="com.example.gpacalculator.dc.User" />
+        <action
+            android:id="@+id/action_gradesFragment_to_addCourseFragment"
+            app:destination="@id/addCourseFragment" />
     </fragment>
 
     <fragment
@@ -48,5 +51,14 @@
             app:exitAnim="@anim/slide_in_r"
             app:popEnterAnim="@anim/slide_out_r"
             app:popExitAnim="@anim/slide_in_l"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addCourseFragment"
+        android:name="com.example.gpacalculator.fragment.AddCourseFragment"
+        android:label="fragment_addcourse"
+        tools:layout="@layout/fragment_addcourse" >
+        <action
+            android:id="@+id/action_addCourseFragment_to_gradesFragment"
+            app:destination="@id/gradesFragment" />
     </fragment>
 </navigation>

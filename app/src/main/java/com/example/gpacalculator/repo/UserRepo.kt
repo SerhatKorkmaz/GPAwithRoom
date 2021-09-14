@@ -16,4 +16,8 @@ class UserRepo(private val userDao: UserDao) {
     fun deleteUser(id : Int){
         userDao.deleteByUserId(id)
     }
+
+    fun findUser(id : Int) : User {
+        return userDao.findUser(id)
+    }
 }

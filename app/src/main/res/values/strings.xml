@@ -20,4 +20,11 @@
     <string name="vi_semester">VI. Semester</string>
     <string name="v_semester">V. Semester</string>
     <string name="semester_gpa">Semester GPA : </string>
+    <string name="add_course">Add Course</string>
+    <string name="enter_code">Enter Code</string>
+    <string name="course_credits">Course Credits</string>
+    <string name="enter_grade">Enter Grade</string>
+    <string name="student_name">Student Name:</string>
+    <string name="semester_code">Semester Code:</string>
+    <string name="total_credits">Total Credits :</string>
 </resources>

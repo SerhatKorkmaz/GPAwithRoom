@@ -1,5 +1,6 @@
 package com.example.gpacalculator.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.example.gpacalculator.databinding.ItemUserBinding
 import com.example.gpacalculator.dc.Lecture
 import com.example.gpacalculator.dc.User
 
-class LectureAdapter(private val listener : OnItemClickListener) : RecyclerView.Adapter<LectureAdapter.LectureViewHolder>(){
+class LectureAdapter(private val listener : OnItemClickListener, private val onDeleteCourseCallback: (Lecture) -> Unit) : RecyclerView.Adapter<LectureAdapter.LectureViewHolder>(){
 
     private var lectureList = emptyList<Lecture>()
 
@@ -46,6 +47,11 @@ class LectureAdapter(private val listener : OnItemClickListener) : RecyclerView.
                     tvCourseCode.setText(lectureList[position].course_code.toString())
                     tvCredits.setText(lectureList[position].credits.toString())
                     tvLetterGrade.setText(lectureList[position].letter_grade.toString())
+
+                    bDelete.setOnClickListener{
+                        Log.d("Tasks", "Callback has sent")
+                        binding.root.setOnClickListener { onDeleteCourseCallback(lectureList[position]) }
+                    }
                 }
             }
         }

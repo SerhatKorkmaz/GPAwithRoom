@@ -16,4 +16,7 @@ interface UserDao {
 
     @Query("DELETE FROM user_table WHERE user_id = :userId")
     fun deleteByUserId(userId: Int)
+
+    @Query("SELECT * FROM user_table WHERE user_id = :userId")
+    fun findUser(userId: Int) : User
 }

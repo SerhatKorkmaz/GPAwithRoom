@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
 
+    var user : User? = null
     val allUsers : LiveData<List<User>>
     private val repository : UserRepo
 
@@ -33,5 +34,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch { Dispatchers.IO
             repository.deleteUser(id)
         }
+    }
+
+    fun getUser(id : Int) : User {
+        viewModelScope.launch { Dispatchers.IO
+             user = repository.findUser(id)
+        }
+        return user!!
     }
 }

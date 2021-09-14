@@ -18,7 +18,7 @@ import com.example.gpacalculator.dc.User
 import com.example.gpacalculator.vm.LectureViewModel
 import com.example.gpacalculator.vm.UserViewModel
 
-class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemClickListener {
+class UserFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemClickListener {
 
     private lateinit var userviewmodel : UserViewModel
     private lateinit var lectureviewmodel : LectureViewModel
@@ -48,7 +48,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemCl
 
         binding.bAdd.setOnClickListener{
             Log.d("Tasks", "Navigating to Add User Fragment")
-            val action = WelcomeFragmentDirections.actionWelcomeFragmentToAddUserFragment()
+            val action = UserFragmentDirections.actionWelcomeFragmentToAddUserFragment()
             findNavController().navigate(action)
         }
 
@@ -74,7 +74,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemCl
 
     override fun onItemClick(position: Int, user : User) {
         currentUserID = user.user_id
-        val action = WelcomeFragmentDirections.actionWelcometoGrades(user)
+        val action = UserFragmentDirections.actionWelcometoGrades(user)
         findNavController().navigate(action)
     }
 }

@@ -10,10 +10,22 @@ import com.example.gpacalculator.selectedSemester
 
 class LectureRepo(private val lectureDao : LectureDao) {
 
-    val allLecturesofStudent : LiveData<List<Lecture>> = lectureDao.getAllLecturesofStudent(currentUserID)
-    val allLecturesinSemester : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, selectedSemester)
+    var allLecturesofStudent : LiveData<List<Lecture>> = lectureDao.getAllLecturesofStudent(currentUserID)
+    var allLecturesinSemester : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, selectedSemester)
 
     fun deleteLecturesof(id : Int){
         lectureDao.deleteByUserId(id)
+    }
+
+    fun deleteLecture(id : Int){
+        lectureDao.deleteCourse(id)
+    }
+
+    fun updatelist(){
+        allLecturesinSemester = lectureDao.getLecturesofStudentinSemester(currentUserID, selectedSemester)
+    }
+
+    fun addLecture(lecture : Lecture){
+        lectureDao.addLecture(lecture)
     }
 }
