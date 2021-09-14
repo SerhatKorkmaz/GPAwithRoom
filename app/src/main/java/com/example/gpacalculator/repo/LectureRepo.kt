@@ -13,4 +13,7 @@ class LectureRepo(private val lectureDao : LectureDao) {
     val allLecturesofStudent : LiveData<List<Lecture>> = lectureDao.getAllLecturesofStudent(currentUserID)
     val allLecturesinSemester : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, selectedSemester)
 
+    fun deleteLecturesof(id : Int){
+        lectureDao.deleteByUserId(id)
+    }
 }

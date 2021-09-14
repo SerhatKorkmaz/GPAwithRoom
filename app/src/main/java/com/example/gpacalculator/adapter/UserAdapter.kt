@@ -1,14 +1,20 @@
 package com.example.gpacalculator.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gpacalculator.databinding.ItemUserBinding
 import com.example.gpacalculator.dc.User
+import com.example.gpacalculator.vm.UserViewModel
 
-class UserAdapter(private val listener : OnItemClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
+
+class UserAdapter(private val listener : OnItemClickListener,private val onDeleteCallback: (User) -> Unit) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
 
     private var userList = emptyList<User>()
 
@@ -17,8 +23,9 @@ class UserAdapter(private val listener : OnItemClickListener) : RecyclerView.Ada
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION){
-                listener.onItemClick(position)
+                listener.onItemClick(position, userList[position])
             }
+
         }
 
         init{
@@ -28,7 +35,7 @@ class UserAdapter(private val listener : OnItemClickListener) : RecyclerView.Ada
     }
 
     interface OnItemClickListener{
-        fun onItemClick(position: Int)
+        fun onItemClick(position: Int, user : User)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -45,6 +52,10 @@ class UserAdapter(private val listener : OnItemClickListener) : RecyclerView.Ada
                     tvDepartmentText.text = userList[position].user_department
                     tvGpaText.text = userList[position].user_CGPA.toString()
 
+                    binding.bDelete.setOnClickListener{
+                        Log.d("Tasks", "Callback has sent")
+                        binding.root.setOnClickListener { onDeleteCallback(userList[position]) }
+                    }
                 }
 
             }

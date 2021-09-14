@@ -24,4 +24,7 @@ interface LectureDao {
 
     @Query("SELECT * FROM lectures_table WHERE student_id = :studentID")
     fun getAllLecturesofStudent(studentID: Int): LiveData<List<Lecture>>
+
+    @Query("DELETE FROM lectures_table WHERE student_id = :userId")
+    fun deleteByUserId(userId: Int)
 }

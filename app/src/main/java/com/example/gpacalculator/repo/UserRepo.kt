@@ -12,4 +12,8 @@ class UserRepo(private val userDao: UserDao) {
     fun addUser(user : User){
         userDao.addUser(user)
     }
+
+    fun deleteUser(id : Int){
+        userDao.deleteByUserId(id)
+    }
 }

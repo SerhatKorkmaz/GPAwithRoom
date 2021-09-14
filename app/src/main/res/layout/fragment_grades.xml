@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragment.GradesFragment">
 
@@ -15,43 +16,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="@string/semester_gpa"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_gpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="2.05"
             android:textSize="20sp"
             android:textStyle="bold"
-            />
+            tools:text="2.05" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" | "
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="Cumulative GPA : "
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_cgpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="2.05"
             android:textSize="20sp"
             android:textStyle="bold"
-            />
+            tools:text="2.05" />
 
 
     </LinearLayout>
@@ -65,41 +57,37 @@
             android:id="@+id/b_1st"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="2dp"
             android:text="@string/i_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="5dp"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/b_2nd"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="6dp"
             android:text="@string/ii_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/b_3rd"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="6dp"
             android:text="@string/iii_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/b_4th"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="6dp"
             android:text="@string/iv_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -112,52 +100,65 @@
             android:id="@+id/b_5th"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="2dp"
             android:text="@string/v_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="5dp"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/b_6th"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="6dp"
             android:text="@string/vi_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/b_7th"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="6dp"
+            android:singleLine="true"
             android:text="@string/vii_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            android:singleLine="true"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/b_8th"
             android:layout_width="95dp"
             android:layout_height="50dp"
+            android:layout_marginStart="6dp"
+            android:singleLine="true"
             android:text="@string/viii_semester"
             android:textSize="8sp"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            android:singleLine="true"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewlecture"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_lecture"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewlecture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_lecture" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add course"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_alignParentBottom="true" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

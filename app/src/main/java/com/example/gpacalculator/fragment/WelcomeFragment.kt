@@ -1,5 +1,7 @@
 package com.example.gpacalculator.fragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,20 +12,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gpacalculator.R
 import com.example.gpacalculator.adapter.UserAdapter
+import com.example.gpacalculator.currentUserID
 import com.example.gpacalculator.databinding.FragmentWelcomeBinding
+import com.example.gpacalculator.dc.User
+import com.example.gpacalculator.vm.LectureViewModel
 import com.example.gpacalculator.vm.UserViewModel
 
 class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemClickListener {
 
-    private lateinit var viewmodel : UserViewModel
+    private lateinit var userviewmodel : UserViewModel
+    private lateinit var lectureviewmodel : LectureViewModel
     private lateinit var adapter : UserAdapter
     private var _binding : FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewmodel = ViewModelProvider(this).get(UserViewModel::class.java)
-        adapter = UserAdapter(this)
+        userviewmodel = ViewModelProvider(this).get(UserViewModel::class.java)
+        lectureviewmodel = ViewModelProvider(this).get(LectureViewModel::class.java)
+        adapter = UserAdapter(this, ::deleteUser)
         Log.d("Tasks", "Welcome Fragment Created")
     }
 
@@ -35,7 +42,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemCl
         binding.recyclerview.adapter = adapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
-        viewmodel.allUsers.observe(viewLifecycleOwner, Observer { user->
+        userviewmodel.allUsers.observe(viewLifecycleOwner, Observer { user->
             adapter.setData(user)
         })
 
@@ -47,7 +54,27 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemCl
 
     }
 
-    override fun onItemClick(position: Int) {
+    private fun deleteUser(user: User) {
+        Log.d("Tasks", "Callback received")
+        Log.d("Tasks", "Deleting a User")
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirm Delete")
+        builder.setMessage("Are you sure you want to delete ${user.user_name} profile from the App?")
+        builder.setPositiveButton("Yes",DialogInterface.OnClickListener{dialog, id ->
+            userviewmodel.deleteUser(user.user_id)
+            lectureviewmodel.deleteLecturesOf(user.user_id)
+            dialog.cancel()
+        })
+        builder.setNegativeButton("No",DialogInterface.OnClickListener{dialog, id ->
+            dialog.cancel()
+        })
+        var alert : AlertDialog = builder.create()
+        alert.show()
+    }
 
+    override fun onItemClick(position: Int, user : User) {
+        currentUserID = user.user_id
+        val action = WelcomeFragmentDirections.actionWelcometoGrades(user)
+        findNavController().navigate(action)
     }
 }

@@ -11,24 +11,42 @@
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
         <action
+            android:id="@+id/actionWelcometoGrades"
+            app:destination="@id/gradesFragment"
+            app:enterAnim="@anim/slide_out_l"
+            app:exitAnim="@anim/slide_in_r"
+            app:popEnterAnim="@anim/slide_out_r"
+            app:popExitAnim="@anim/slide_in_l"/>
+        <action
             android:id="@+id/action_welcomeFragment_to_addUserFragment"
             app:destination="@id/addUserFragment"
             app:enterAnim="@anim/slide_in_r"
             app:exitAnim="@anim/slide_out_l"
             app:popEnterAnim="@anim/slide_in_l"
-            app:popExitAnim="@anim/slide_out_r" />
+            app:popExitAnim="@anim/slide_out_r"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/gradesFragment"
+        android:name="com.example.gpacalculator.fragment.GradesFragment"
+        android:label="GradesFragment"
+        tools:layout="@layout/fragment_grades" >
+        <argument
+            android:name="user"
+            app:argType="com.example.gpacalculator.dc.User" />
+    </fragment>
+
     <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.gpacalculator.fragment.AddUserFragment"
-        android:label="AddUserFragment"
-        tools:layout="@layout/fragment_adduser">
+        android:label="fragment_adduser"
+        tools:layout="@layout/fragment_adduser" >
         <action
             android:id="@+id/action_addUserFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
             app:enterAnim="@anim/slide_out_l"
             app:exitAnim="@anim/slide_in_r"
             app:popEnterAnim="@anim/slide_out_r"
-            app:popExitAnim="@anim/slide_in_l" />
+            app:popExitAnim="@anim/slide_in_l"/>
     </fragment>
 </navigation>

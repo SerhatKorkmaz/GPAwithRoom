@@ -2,10 +2,7 @@ package com.example.gpacalculator.dao
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.gpacalculator.dc.User
 
 @Dao
@@ -16,4 +13,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table ORDER BY user_id")
     fun getAllUsers(): LiveData<List<User>>
+
+    @Query("DELETE FROM user_table WHERE user_id = :userId")
+    fun deleteByUserId(userId: Int)
 }

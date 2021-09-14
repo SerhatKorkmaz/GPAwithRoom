@@ -17,7 +17,6 @@ import com.example.gpacalculator.vm.UserViewModel
 class AddUserFragment : Fragment(R.layout.fragment_adduser){
 
     private lateinit var userViewModel : UserViewModel
-
     private var _binding : FragmentAdduserBinding? = null
     private val binding get() = _binding!!
 
@@ -34,17 +33,21 @@ class AddUserFragment : Fragment(R.layout.fragment_adduser){
         _binding = FragmentAdduserBinding.bind(view)
 
         binding.apply {
-            while (tvDepartmentText.text.isEmpty() || tvGpaText.text.isEmpty() || tvNameText.text.isEmpty())
-                bAdduser.isEnabled = false
 
                 binding.bAdduser.setOnClickListener{
-                    val newUser = User(0,tvNameText.text.toString(),tvDepartmentText.text.toString(),tvGpaText.text.toString() as Float)
-                    userViewModel.addUser(newUser)
-                    Toast.makeText(requireContext(), "New User Created", Toast.LENGTH_LONG).show()
 
-                    Log.d("Tasks", "Navigating to Welcome Fragment")
-                    val action = AddUserFragmentDirections.actionAddUserFragmentToWelcomeFragment()
-                    findNavController().navigate(action)
+                    if (tvDepartmentText.text.isEmpty() || tvGpaText.text.isEmpty() || tvNameText.text.isEmpty())
+                        Toast.makeText(requireContext(), "You need to fill all the fields to add a user", Toast.LENGTH_LONG).show()
+
+                    else{
+                        val newUser = User(0,tvNameText.text.toString(),tvDepartmentText.text.toString(),tvGpaText.text.toString().toFloat())
+                        userViewModel.addUser(newUser)
+                        Toast.makeText(requireContext(), "New User Created", Toast.LENGTH_LONG).show()
+
+                        Log.d("Tasks", "Navigating to Welcome Fragment")
+                        val action = AddUserFragmentDirections.actionAddUserFragmentToWelcomeFragment()
+                        findNavController().navigate(action)
+                    }
 
                 }
         }
