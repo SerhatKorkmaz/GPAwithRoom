@@ -54,7 +54,7 @@ class UserAdapter(private val listener : OnItemClickListener,private val onDelet
 
                     binding.bDelete.setOnClickListener{
                         Log.d("Tasks", "Callback has sent")
-                        binding.root.setOnClickListener { onDeleteCallback(userList[position]) }
+                        onDeleteCallback(userList[position])
                     }
                 }
 

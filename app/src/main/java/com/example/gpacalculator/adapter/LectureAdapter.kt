@@ -44,13 +44,13 @@ class LectureAdapter(private val listener : OnItemClickListener, private val onD
         with(holder){
             with(lectureList[position]){
                 binding.apply {
-                    tvCourseCode.setText(lectureList[position].course_code.toString())
-                    tvCredits.setText(lectureList[position].credits.toString())
+                    tvCourseCode.setText(lectureList[position].course_code)
+                    tvCredits.setText("  " + lectureList[position].credits.toString()  + " Credits  ")
                     tvLetterGrade.setText(lectureList[position].letter_grade.toString())
 
                     bDelete.setOnClickListener{
                         Log.d("Tasks", "Callback has sent")
-                        binding.root.setOnClickListener { onDeleteCourseCallback(lectureList[position]) }
+                        onDeleteCourseCallback(lectureList[position])
                     }
                 }
             }

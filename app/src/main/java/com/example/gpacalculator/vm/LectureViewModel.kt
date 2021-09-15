@@ -50,7 +50,6 @@ class LectureViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch { Dispatchers.IO
             repository.addLecture(lecture)
             updateCourseList()
-            calculateCGPA()
         }
     }
 
@@ -69,47 +68,42 @@ class LectureViewModel(application: Application) : AndroidViewModel(application)
     fun updateCourseList(){
         viewModelScope.launch { Dispatchers.IO
             repository.updatelist()
-            changeSemester(selectedSemester)
+            allLecturesinSemester = repository.allLecturesinSemester
+            allLecturesofStudent = repository.allLecturesofStudent
         }
     }
 
-    fun calculateCGPA() {
+    fun calculateCGPA(currentSemester: Int) {
+        var ctotalCredits: Int = 0
+        var ctotalWeight: Double = 0.0
         var totalCredits: Int = 0
         var totalWeight: Double = 0.0
-        allLecturesofStudent = lectureDao.getAllLecturesofStudent(currentUserID)
-        val lectures: List<Lecture>? = allLecturesofStudent.value
-        Log.d("Tasks", "Current size of Semester All List is ${lectures?.size}")
-        if (lectures != null) {
-            for (item in lectures) {
-                totalCredits += item.credits
-                if (item.letter_grade == "AA") totalWeight += item.credits * 4
-                else if (item.letter_grade == "BA") totalWeight += item.credits * 3.5
-                else if (item.letter_grade == "BB") totalWeight += item.credits * 3
-                else if (item.letter_grade == "CB") totalWeight += item.credits * 2.5
-                else if (item.letter_grade == "CC") totalWeight += item.credits * 2
-                else if (item.letter_grade == "DC") totalWeight += item.credits * 1.5
-                else if (item.letter_grade == "DD") totalWeight += item.credits * 1
-                else if (item.letter_grade == "FD") totalWeight += item.credits * 0.5
-                else totalWeight += item.credits * 0.0
+        val clectures: List<Lecture>? = allLecturesofStudent.value
+        val lectures: List<Lecture>? = allLecturesinSemester.value
+        Log.d("Tasks", "Current size of Semester ${selectedSemester} List is ${lectures?.size}")
+        Log.d("Tasks", "Current size of Semester All List is ${allLecturesofStudent.value?.size}")
+        if (clectures != null) {
+            for (item in clectures) {
+                ctotalCredits += item.credits
+                if (item.letter_grade == "AA") ctotalWeight += item.credits * 4
+                else if (item.letter_grade == "BA") ctotalWeight += item.credits * 3.5
+                else if (item.letter_grade == "BB") ctotalWeight += item.credits * 3
+                else if (item.letter_grade == "CB") ctotalWeight += item.credits * 2.5
+                else if (item.letter_grade == "CC") ctotalWeight += item.credits * 2
+                else if (item.letter_grade == "DC") ctotalWeight += item.credits * 1.5
+                else if (item.letter_grade == "DD") ctotalWeight += item.credits * 1
+                else if (item.letter_grade == "FD") ctotalWeight += item.credits * 0.5
+                else ctotalWeight += item.credits * 0.0
             }
-            CGPA = totalWeight / totalCredits
+            CGPA = ctotalWeight / ctotalCredits
             cumulativeGPA.value = CGPA
-            cumulativeCredits.value = totalCredits
+            cumulativeCredits.value = ctotalCredits
         }
         else{
             CGPA = 0.0
             cumulativeGPA.value = CGPA
             cumulativeCredits.value = 0
         }
-    }
-
-    fun changeSemester(currentSemester : Int) {
-        Log.d("Tasks", "Changing List for Semester ${selectedSemester}")
-        var totalCredits: Int = 0
-        var totalWeight: Double = 0.0
-        allLecturesinSemester = lectureDao.getLecturesofStudentinSemester(currentUserID, currentSemester)
-        val lectures: List<Lecture>? = allLecturesinSemester.value
-        Log.d("Tasks", "Current size of Semester ${selectedSemester} List is ${lectures?.size}")
         if (lectures != null) {
             for (item in lectures) {
                 totalCredits += item.credits

@@ -23,6 +23,7 @@ class LectureRepo(private val lectureDao : LectureDao) {
 
     fun updatelist(){
         allLecturesinSemester = lectureDao.getLecturesofStudentinSemester(currentUserID, selectedSemester)
+        allLecturesofStudent = lectureDao.getAllLecturesofStudent(currentUserID)
     }
 
     fun addLecture(lecture : Lecture){

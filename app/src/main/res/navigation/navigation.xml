@@ -41,7 +41,7 @@
 
     <fragment
         android:id="@+id/addUserFragment"
-        android:name="com.example.gpacalculator.fragment.AddUserFragment"
+        android:name="com.example.gpacalculator.fragment.AddUserDialogFragment"
         android:label="fragment_adduser"
         tools:layout="@layout/fragment_adduser" >
         <action

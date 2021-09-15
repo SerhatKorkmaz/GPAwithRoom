@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/bg_drawable"
+    android:background="@drawable/bg_primary"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -89,7 +89,7 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/bg_drawable"
-       android:src="@drawable/ic_delete" />
+        android:background="@drawable/bg_primary"
+        android:src="@drawable/ic_delete" />
 
 </LinearLayout>

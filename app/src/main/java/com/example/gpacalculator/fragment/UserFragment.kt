@@ -47,9 +47,9 @@ class UserFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemClick
         })
 
         binding.bAdd.setOnClickListener{
-            Log.d("Tasks", "Navigating to Add User Fragment")
-            val action = UserFragmentDirections.actionWelcomeFragmentToAddUserFragment()
-            findNavController().navigate(action)
+            Log.d("Tasks", "Creating Add User Dialog Fragment")
+            var dialog = AddUserDialogFragment()
+            dialog.show(childFragmentManager,"")
         }
 
     }
