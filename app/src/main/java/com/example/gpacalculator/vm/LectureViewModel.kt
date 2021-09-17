@@ -17,10 +17,20 @@ import kotlinx.coroutines.launch
 
 class LectureViewModel(application: Application) : AndroidViewModel(application) {
 
-    var allLecturesofStudent : LiveData<List<Lecture>>
-    var allLecturesinSemester : LiveData<List<Lecture>>
+
     private val repository : LectureRepo
     private val lectureDao = DataBase.getDatabase(application).lectureDao()
+    var allLecturesofStudent : LiveData<List<Lecture>>
+    var allLecturesinSemester1 : LiveData<List<Lecture>>
+    var allLecturesinSemester2 : LiveData<List<Lecture>>
+    var allLecturesinSemester3 : LiveData<List<Lecture>>
+    var allLecturesinSemester4 : LiveData<List<Lecture>>
+    var allLecturesinSemester5 : LiveData<List<Lecture>>
+    var allLecturesinSemester6 : LiveData<List<Lecture>>
+    var allLecturesinSemester7 : LiveData<List<Lecture>>
+    var allLecturesinSemester8 : LiveData<List<Lecture>>
+    var GPA : Double = 0.0
+    var CGPA : Double = 0.0
 
     val currentGPA : MutableLiveData<Double> by lazy {
         MutableLiveData<Double>()
@@ -38,18 +48,22 @@ class LectureViewModel(application: Application) : AndroidViewModel(application)
         MutableLiveData<Int>()
     }
 
-    var GPA : Double = 0.0
-    var CGPA : Double = 0.0
     init {
         repository = LectureRepo(lectureDao)
-        allLecturesinSemester = repository.allLecturesinSemester
+        allLecturesinSemester1 = repository.allLecturesinSemester1
+        allLecturesinSemester2 = repository.allLecturesinSemester2
+        allLecturesinSemester3 = repository.allLecturesinSemester3
+        allLecturesinSemester4 = repository.allLecturesinSemester4
+        allLecturesinSemester5 = repository.allLecturesinSemester5
+        allLecturesinSemester6 = repository.allLecturesinSemester6
+        allLecturesinSemester7 = repository.allLecturesinSemester7
+        allLecturesinSemester8 = repository.allLecturesinSemester8
         allLecturesofStudent = repository.allLecturesofStudent
     }
 
     fun addCourse(lecture : Lecture){
         viewModelScope.launch { Dispatchers.IO
             repository.addLecture(lecture)
-            updateCourseList()
         }
     }
 
@@ -65,23 +79,11 @@ class LectureViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun updateCourseList(){
-        viewModelScope.launch { Dispatchers.IO
-            repository.updatelist()
-            allLecturesinSemester = repository.allLecturesinSemester
-            allLecturesofStudent = repository.allLecturesofStudent
-        }
-    }
-
-    fun calculateCGPA(currentSemester: Int) {
+    fun calculateCGPA() {
         var ctotalCredits: Int = 0
         var ctotalWeight: Double = 0.0
-        var totalCredits: Int = 0
-        var totalWeight: Double = 0.0
-        val clectures: List<Lecture>? = allLecturesofStudent.value
-        val lectures: List<Lecture>? = allLecturesinSemester.value
-        Log.d("Tasks", "Current size of Semester ${selectedSemester} List is ${lectures?.size}")
-        Log.d("Tasks", "Current size of Semester All List is ${allLecturesofStudent.value?.size}")
+        var clectures: List<Lecture>? = allLecturesofStudent.value
+        Log.d("Tasks", "Current size of Semester List is ${clectures?.size} for ${selectedSemester}")
         if (clectures != null) {
             for (item in clectures) {
                 ctotalCredits += item.credits
@@ -104,8 +106,23 @@ class LectureViewModel(application: Application) : AndroidViewModel(application)
             cumulativeGPA.value = CGPA
             cumulativeCredits.value = 0
         }
-        if (lectures != null) {
-            for (item in lectures) {
+    }
+
+    fun calculateGPA(){
+        var totalCredits: Int = 0
+        var totalWeight: Double = 0.0
+        var clectures: List<Lecture>?
+        if(selectedSemester == 1) clectures= allLecturesinSemester1.value
+        else if(selectedSemester == 2)  clectures = allLecturesinSemester2.value
+        else if(selectedSemester == 3)  clectures = allLecturesinSemester3.value
+        else if(selectedSemester == 4)  clectures = allLecturesinSemester4.value
+        else if(selectedSemester == 5)  clectures = allLecturesinSemester5.value
+        else if(selectedSemester == 6)  clectures = allLecturesinSemester6.value
+        else if(selectedSemester == 7)  clectures = allLecturesinSemester7.value
+        else clectures = allLecturesinSemester8.value
+        Log.d("Tasks", "Current size of Semester List is ${clectures?.size} for ${selectedSemester}")
+        if (clectures != null) {
+            for (item in clectures) {
                 totalCredits += item.credits
                 if (item.letter_grade == "AA") totalWeight += item.credits * 4
                 else if (item.letter_grade == "BA") totalWeight += item.credits * 3.5

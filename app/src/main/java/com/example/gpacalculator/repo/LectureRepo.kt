@@ -11,7 +11,14 @@ import com.example.gpacalculator.selectedSemester
 class LectureRepo(private val lectureDao : LectureDao) {
 
     var allLecturesofStudent : LiveData<List<Lecture>> = lectureDao.getAllLecturesofStudent(currentUserID)
-    var allLecturesinSemester : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, selectedSemester)
+    var allLecturesinSemester1 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 1)
+    var allLecturesinSemester2 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 2)
+    var allLecturesinSemester3 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 3)
+    var allLecturesinSemester4 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 4)
+    var allLecturesinSemester5 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 5)
+    var allLecturesinSemester6 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 6)
+    var allLecturesinSemester7 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 7)
+    var allLecturesinSemester8 : LiveData<List<Lecture>> = lectureDao.getLecturesofStudentinSemester(currentUserID, 8)
 
     fun deleteLecturesof(id : Int){
         lectureDao.deleteByUserId(id)
@@ -19,11 +26,6 @@ class LectureRepo(private val lectureDao : LectureDao) {
 
     fun deleteLecture(id : Int){
         lectureDao.deleteCourse(id)
-    }
-
-    fun updatelist(){
-        allLecturesinSemester = lectureDao.getLecturesofStudentinSemester(currentUserID, selectedSemester)
-        allLecturesofStudent = lectureDao.getAllLecturesofStudent(currentUserID)
     }
 
     fun addLecture(lecture : Lecture){

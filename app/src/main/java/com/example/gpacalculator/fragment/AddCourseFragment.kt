@@ -44,7 +44,7 @@ class AddCourseFragment : Fragment(R.layout.fragment_addcourse) {
             binding.bAddcourse.setOnClickListener{
 
                 if (tvCourseCode.text.isEmpty() || tvCredits.text.isEmpty() || tvLetterGrade.text.isEmpty())
-                    Toast.makeText(requireContext(), "You need to fill all the fields to add a user", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "You need to fill all the fields to add a course", Toast.LENGTH_LONG).show()
 
                 else{
                     val newLecture = Lecture(0,tvCourseCode.text.toString(),tvCredits.text.toString().toInt(),tvLetterGrade.text.toString(), selectedSemester, currentUserID)

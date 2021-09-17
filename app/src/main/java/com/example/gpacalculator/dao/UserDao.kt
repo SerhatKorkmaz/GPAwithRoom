@@ -19,4 +19,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE user_id = :userId")
     fun findUser(userId: Int) : User
+
+    @Query("UPDATE user_table SET user_CGPA = :cgpa WHERE user_id = :userId")
+    fun updateUser(userId: Int, cgpa : Double)
 }

@@ -50,7 +50,7 @@ class UserAdapter(private val listener : OnItemClickListener,private val onDelet
                 binding.apply {
                     tvNameText.text = userList[position].user_name
                     tvDepartmentText.text = userList[position].user_department
-                    tvGpaText.text = userList[position].user_CGPA.toString()
+                    tvGpaText.text = String.format("%.2f", userList[position].user_CGPA)
 
                     binding.bDelete.setOnClickListener{
                         Log.d("Tasks", "Callback has sent")

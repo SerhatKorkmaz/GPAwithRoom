@@ -20,4 +20,8 @@ class UserRepo(private val userDao: UserDao) {
     fun findUser(id : Int) : User {
         return userDao.findUser(id)
     }
+
+    fun updateUser(id : Int, cgpa : Double) {
+        userDao.updateUser(id,cgpa)
+    }
 }

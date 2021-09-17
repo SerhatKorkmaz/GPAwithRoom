@@ -53,86 +53,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/b_1st"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="2dp"
-            android:text="@string/i_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/semester"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            />
 
-        <Button
-            android:id="@+id/b_2nd"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="6dp"
-            android:text="@string/ii_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/b_3rd"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="6dp"
-            android:text="@string/iii_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/b_4th"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="6dp"
-            android:text="@string/iv_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/b_5th"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="2dp"
-            android:text="@string/v_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/b_6th"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="6dp"
-            android:text="@string/vi_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/b_7th"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="6dp"
-            android:singleLine="true"
-            android:text="@string/vii_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/b_8th"
-            android:layout_width="95dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="6dp"
-            android:singleLine="true"
-            android:text="@string/viii_semester"
-            android:textSize="8sp"
-            android:textStyle="bold" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:spinnerMode="dialog"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/bg_primary"
+            android:gravity="center"
+            />
 
     </LinearLayout>
 

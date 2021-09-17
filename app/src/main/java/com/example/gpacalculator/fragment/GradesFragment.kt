@@ -1,42 +1,45 @@
 package com.example.gpacalculator.fragment
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gpacalculator.R
+import com.example.gpacalculator.*
 import com.example.gpacalculator.adapter.LectureAdapter
-import com.example.gpacalculator.adapter.UserAdapter
 import com.example.gpacalculator.databinding.FragmentGradesBinding
-import com.example.gpacalculator.databinding.FragmentWelcomeBinding
 import com.example.gpacalculator.dc.Lecture
-import com.example.gpacalculator.dc.User
-import com.example.gpacalculator.selectedSemester
 import com.example.gpacalculator.vm.LectureViewModel
 import com.example.gpacalculator.vm.UserViewModel
 
 class GradesFragment : Fragment(R.layout.fragment_grades), LectureAdapter.OnItemClickListener {
 
     private val args by navArgs<GradesFragmentArgs>()
+    private lateinit var arrayAdapter: ArrayAdapter<String>
     private lateinit var viewmodel : LectureViewModel
+    private lateinit var usermodel : UserViewModel
     private lateinit var adapter : LectureAdapter
     private var _binding : FragmentGradesBinding? = null
     private val binding get() = _binding!!
+    var leclist : List<Lecture> = emptyList()
+    var currentList : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        selectedSemester = 1
         viewmodel = ViewModelProvider(this).get(LectureViewModel::class.java)
-        viewmodel.calculateCGPA(selectedSemester)
+        usermodel = ViewModelProvider(this).get(UserViewModel::class.java)
         adapter = LectureAdapter(this, ::deleteCourse)
+        arrayAdapter = ArrayAdapter(requireContext(),R.layout.item_spinner,semesterList)
         Log.d("Tasks", "Grades Fragment Created")
     }
 
@@ -46,56 +49,107 @@ class GradesFragment : Fragment(R.layout.fragment_grades), LectureAdapter.OnItem
         _binding = FragmentGradesBinding.bind(view)
 
         binding.apply {
+            spinner.adapter = arrayAdapter
             recyclerviewlecture.adapter = adapter
             recyclerviewlecture.layoutManager = LinearLayoutManager(requireContext())
+            if(interracted) spinner.setSelection(selectedSemester-1)
+            else interracted = true
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 
-            b1st.setOnClickListener {
-                selectedSemester = 1
-                viewmodel.updateCourseList()
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedSemester = position+1
+                if(selectedSemester == 1){
+                    if(viewmodel.allLecturesinSemester1.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester1.value!!)
+                }
+                else if(selectedSemester == 2){
+                    if(viewmodel.allLecturesinSemester2.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester2.value!!)
+                }
+                else if(selectedSemester == 3){
+                    if(viewmodel.allLecturesinSemester3.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester3.value!!)
+                }
+                else if(selectedSemester == 4){
+                    if(viewmodel.allLecturesinSemester4.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester4.value!!)
+                }
+                else if(selectedSemester == 5){
+                    if(viewmodel.allLecturesinSemester5.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester5.value!!)
+                }
+                else if(selectedSemester == 6){
+                    if(viewmodel.allLecturesinSemester6.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester6.value!!)
+                }
+                else if(selectedSemester == 7){
+                    if(viewmodel.allLecturesinSemester7.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester7.value!!)
+                }
+                else if(selectedSemester == 8){
+                    if(viewmodel.allLecturesinSemester8.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesinSemester8.value!!)
+                }
+                else if(selectedSemester == 9){
+                    if(viewmodel.allLecturesofStudent.value == null) adapter.setData(emptyList())
+                    else adapter.setData(viewmodel.allLecturesofStudent.value!!)
+                }
+                viewmodel.calculateGPA()
+                Log.d("Tasks", "Selected semester = ${selectedSemester}")
             }
 
-            b2nd.setOnClickListener {
-                selectedSemester = 2
-                viewmodel.updateCourseList()
-            }
+        }
 
-            b3rd.setOnClickListener {
-                selectedSemester = 3
-                viewmodel.updateCourseList()
-            }
-
-            b4th.setOnClickListener {
-                selectedSemester = 4
-                viewmodel.updateCourseList()
-            }
-
-            b5th.setOnClickListener {
-                selectedSemester = 5
-                viewmodel.updateCourseList()
-            }
-
-            b6th.setOnClickListener {
-                selectedSemester = 6
-                viewmodel.updateCourseList()
-            }
-
-            b7th.setOnClickListener {
-                selectedSemester = 7
-                viewmodel.updateCourseList()
-            }
-
-            b8th.setOnClickListener {
-                selectedSemester = 8
-                viewmodel.updateCourseList()
-            }
-
-            viewmodel.allLecturesinSemester.observe(viewLifecycleOwner, Observer { lectures->
+            viewmodel.allLecturesinSemester1.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
                 adapter.setData(lectures)
-                viewmodel.calculateCGPA(selectedSemester)
             })
 
-            viewmodel.allLecturesofStudent.observe(viewLifecycleOwner, Observer { lectures->
-                viewmodel.calculateCGPA(selectedSemester)
+            viewmodel.allLecturesinSemester2.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
+                adapter.setData(lectures)
+            })
+
+            viewmodel.allLecturesinSemester3.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
+                adapter.setData(lectures)
+            })
+
+            viewmodel.allLecturesinSemester4.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
+                adapter.setData(lectures)
+            })
+
+            viewmodel.allLecturesinSemester5.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
+                adapter.setData(lectures)
+            })
+
+            viewmodel.allLecturesinSemester6.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
+                adapter.setData(lectures)
+            })
+
+            viewmodel.allLecturesinSemester7.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
+                adapter.setData(lectures)
+            })
+
+            viewmodel.allLecturesinSemester8.observe(viewLifecycleOwner, Observer {lectures->
+                viewmodel.calculateGPA()
+                adapter.setData(lectures)
+            })
+
+            viewmodel.allLecturesofStudent.observe(viewLifecycleOwner, Observer {
+                Log.d("Tasks", "All List Changed")
+                viewmodel.calculateCGPA()
+                usermodel.updateUser(currentUserID,viewmodel.CGPA)
+                if(viewmodel.allLecturesofStudent.value == null) adapter.setData(emptyList())
+                else adapter.setData(viewmodel.allLecturesofStudent.value!!)
             })
 
             viewmodel.currentCredits.observe(viewLifecycleOwner, Observer { currentCredits ->
@@ -134,9 +188,7 @@ class GradesFragment : Fragment(R.layout.fragment_grades), LectureAdapter.OnItem
         builder.setMessage("Are you sure you want to delete ${lecture.course_code} Course from ${selectedSemester}?")
         builder.setPositiveButton("Yes", DialogInterface.OnClickListener{ dialog, id ->
             viewmodel.deleteLecture(lecture.course_id)
-            viewmodel.updateCourseList()
-            viewmodel.calculateCGPA(selectedSemester)
-            adapter.notifyDataSetChanged()
+            viewmodel.calculateCGPA()
             dialog.cancel()
         })
         builder.setNegativeButton("No", DialogInterface.OnClickListener{ dialog, id ->

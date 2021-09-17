@@ -15,6 +15,7 @@ import com.example.gpacalculator.adapter.UserAdapter
 import com.example.gpacalculator.currentUserID
 import com.example.gpacalculator.databinding.FragmentWelcomeBinding
 import com.example.gpacalculator.dc.User
+import com.example.gpacalculator.selectedSemester
 import com.example.gpacalculator.vm.LectureViewModel
 import com.example.gpacalculator.vm.UserViewModel
 
@@ -73,6 +74,7 @@ class UserFragment : Fragment(R.layout.fragment_welcome),UserAdapter.OnItemClick
     }
 
     override fun onItemClick(position: Int, user : User) {
+        if(user.user_id != currentUserID) selectedSemester = 1
         currentUserID = user.user_id
         val action = UserFragmentDirections.actionWelcometoGrades(user)
         findNavController().navigate(action)
