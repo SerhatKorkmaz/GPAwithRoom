@@ -2,7 +2,7 @@
     <string name="app_name">GPAcalculator</string>
     <string name="name">Student Name : </string>
     <string name="student_department">Student Department :</string>
-    <string name="student_gpa">Student GPA :</string>
+    <string name="student_gpa">Student CGPA :</string>
     <string name="add_new_user">Add New User</string>
     <string name="enter_gpa">Enter GPA</string>
     <string name="enter_department">Enter Department</string>

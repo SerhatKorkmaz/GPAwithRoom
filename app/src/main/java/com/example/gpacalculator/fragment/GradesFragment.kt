@@ -147,7 +147,9 @@ class GradesFragment : Fragment(R.layout.fragment_grades), LectureAdapter.OnItem
             viewmodel.allLecturesofStudent.observe(viewLifecycleOwner, Observer {
                 Log.d("Tasks", "All List Changed")
                 viewmodel.calculateCGPA()
-                usermodel.updateUser(currentUserID,viewmodel.CGPA)
+                Log.d("Tasks", "${viewmodel.CGPA}")
+                if(viewmodel.CGPA == null) usermodel.updateUser(currentUserID,0.0)
+                else usermodel.updateUser(currentUserID,viewmodel.CGPA)
                 if(viewmodel.allLecturesofStudent.value == null) adapter.setData(emptyList())
                 else adapter.setData(viewmodel.allLecturesofStudent.value!!)
             })
